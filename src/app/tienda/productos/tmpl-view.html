@@ -1,0 +1,32 @@
+<h1 class="display-1">Producto</h1>
+<dl class="row">
+  <dt>Ref.</dt>
+  <dd>{{VM.Elemento.productId }}</dd>
+  <dt>Name</dt>
+  <dd>{{VM.Elemento.name }}</dd>
+  <dt>Number</dt>
+  <dd>{{VM.Elemento.productNumber }}</dd>
+  <dt>Color</dt>
+  <dd>{{VM.Elemento.color }}</dd>
+  <dt>Standard Cost</dt>
+  <dd>{{VM.Elemento.standardCost | currency:'EUR':'symbol':'1.2-2' }}</dd>
+  <dt>List Price</dt>
+  <dd>{{VM.Elemento.listPrice | currency:'EUR':'symbol':'1.2-2' }}</dd>
+  <dt>Size</dt>
+  <dd>{{VM.Elemento.size }}</dd>
+  <dt>Weight</dt>
+  <dd>{{VM.Elemento.weight }}</dd>
+  <dt>Category</dt>
+  <dd>{{VM.Elemento.productCategory }}</dd>
+  <dt>Model</dt>
+  <dd>{{VM.Elemento.productModel }}</dd>
+  <dt>Start Date</dt>
+  <dd>{{VM.Elemento.sellStartDate | date }}</dd>
+  <dt>End Date</dt>
+  <dd>{{VM.Elemento.sellEndDate | date }}</dd>
+  <dt>Discontinued Date</dt>
+  <dd>{{VM.Elemento.discontinuedDate | date }}</dd>
+</dl>
+<div>
+  <app-form-buttons (cancel)="VM.cancel()" />
+</div>

@@ -1,0 +1,59 @@
+<div class="d-flex align-content-center flex-wrap">
+  <app-card class="p2 flex-fill" [header]="'Ejemplo de notificaciones'">
+    <p>
+      <input type="button" value="Error" (click)="vm.add('Esto es una notificación de error')">
+      <input type="button" value="Warn" (click)="vm.add('Esta notificación es un aviso',  vm.NotificationType.warn)">
+      <input type="button" value="Info"
+        (click)="vm.add('Solo una notificación informativa',  vm.NotificationType.info)">
+      <input type="button" value="Log" (click)="vm.add('Para trazar con notificaciones',  vm.NotificationType.log)">
+    </p>
+  </app-card>
+  <app-card class="p2 flex-fill" [header]="'Ejemplo de alert'">
+    <p>
+      <input type="button" value="Defecto"
+        (click)="window.alert('Esto es una notificación', vm.NotificationType.error, 'Demo', 'OK')">
+      <input type="button" value="Error"
+        (click)="window.alert('Esto es una notificación de error', vm.NotificationType.error)">
+      <input type="button" value="Warn"
+        (click)="window.alert('Esta notificación es un aviso', vm.NotificationType.warn)">
+      <input type="button" value="Info"
+        (click)="window.alert('Solo una notificación informativa',  vm.NotificationType.info)">
+      <input type="button" value="Log"
+        (click)="window.alert('Para trazar con notificaciones',  vm.NotificationType.log)">
+    </p>
+  </app-card>
+</div>
+<div class="d-flex flex-row mb-3">
+  <app-card class="p2 flex-fill" header="Lista de provincias">
+    <ul class="list-group">
+      @for(item of listado() | slice:-5; track item.id ) {
+      <li class="list-group-item" [style.background-color]="$odd ? 'lightskyblue' : 'lightcyan'">
+        {{item.nombre | titlecase}} ({{item.id}}) [Elemento {{$index + 1}} de {{listado().length}}]
+      </li>
+      }
+    </ul>
+  </app-card>
+  <app-card class="p2 flex-fill" header="Mantenimiento de provincias">
+    <p>
+      <select [(ngModel)]="idProvincia">
+        @for(item of listado(); track item.id ) {
+        <option [value]="item.id">{{item.nombre | capitalize}}</option>>
+        }
+      </select>
+      Seleccionado: {{idProvincia()}} ({{index()}})
+      <input type="text" value="Tabarnia" #txtProvincia>
+      <input type="button" value="Añadir" (click)="add(txtProvincia.value)" />
+    </p>
+  </app-card>
+</div>
+<div>
+  <button (click)="createMyComponent()">Crear Componente Dinámico</button>
+  <button (click)="destroyMyComponent()" [disabled]="!componentRef">Destruir Componente</button>
+
+  <ng-container #dynamicComponentContainer></ng-container>
+</div>
+<div class="row">
+  <input type="number" [(ngModel)]="valCalculadora">
+</div>
+<calculadora [init]="valCalculadora()" />
+<my-sizer [(size)]="valCalculadora" />

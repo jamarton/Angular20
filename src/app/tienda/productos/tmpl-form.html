@@ -1,0 +1,88 @@
+<h1 class="display-1">{{VM.Modo === 'add' ? 'Añadir' : 'Modificar'}} Producto</h1>
+<form #miForm="ngForm" class="row gy-2 gx-2 align-items-start">
+  <div class="form-floating">
+    <input class="form-control" [class.is-invalid]="name.invalid" type="text" name="name" id="name"
+      [(ngModel)]="VM.Elemento.name" #name="ngModel" placeholder="name" notblank minlength="2" maxlength="50">
+    <label for="name">Name:</label>
+    <output class="invalid-feedback" [hidden]="name.valid">{{name.errors | errormsg}}</output>
+  </div>
+  <div class="form-floating col-md-4">
+    <input class="form-control" [class.is-invalid]="productNumber.invalid" type="text" name="productNumber"
+      id="productNumber" [(ngModel)]="VM.Elemento.productNumber" #productNumber="ngModel" placeholder="productNumber"
+      notblank uppercase maxlength="25">
+    <label for="productNumber">Number:</label>
+    <output class="invalid-feedback" [hidden]="productNumber.valid">{{productNumber.errors | errormsg}}</output>
+  </div>
+  <div class="form-floating col-md-4">
+    <input class="form-control" [class.is-invalid]="color.invalid" type="text" name="color" id="color"
+      [(ngModel)]="VM.Elemento.color" #color="ngModel" placeholder="color" maxlength="15">
+    <label for="color">Color:</label>
+    <output class="invalid-feedback" [hidden]="color.valid">{{color.errors | errormsg}}</output>
+  </div>
+  <div class="form-floating col-md-4">
+    <input class="form-control" [class.is-invalid]="standardCost.invalid" type="number" step="0.0001"
+      name="standardCost" id="standardCost" [(ngModel)]="VM.Elemento.standardCost" #standardCost="ngModel"
+      placeholder="standardCost" required>
+    <label for="standardCost">Standard Cost:</label>
+    <output class="invalid-feedback" [hidden]="standardCost.valid">{{standardCost.errors | errormsg}}</output>
+  </div>
+  <div class="form-floating col-md-4">
+    <input class="form-control" [class.is-invalid]="listPrice.invalid" type="number" step="0.01" name="listPrice"
+      id="listPrice" [(ngModel)]="VM.Elemento.listPrice" #listPrice="ngModel" placeholder="listPrice" required>
+    <label for="listPrice">List Price:</label>
+    <output class="invalid-feedback" [hidden]="listPrice.valid">{{listPrice.errors | errormsg}}</output>
+  </div>
+  <div class="form-floating col-md-4">
+    <input class="form-control" [class.is-invalid]="size.invalid" type="text" name="size" id="size"
+      [(ngModel)]="VM.Elemento.size" #size="ngModel" placeholder="size" maxlength="5">
+    <label for="size">Size:</label>
+    <output class="invalid-feedback" [hidden]="size.valid">{{size.errors | errormsg}}</output>
+  </div>
+  <div class="form-floating col-md-4">
+    <input class="form-control" [class.is-invalid]="weight.invalid" type="number" step="0.01" max="999999" name="weight" id="weight"
+      [(ngModel)]="VM.Elemento.weight" #weight="ngModel" placeholder="weight">
+    <label for="weight">Weight:</label>
+    <output class="invalid-feedback" [hidden]="weight.valid">{{weight.errors | errormsg}}</output>
+  </div>
+  <div class="form-floating col-md-6">
+    <select class="form-control form-select" name="productCategoryId" id="productCategoryId"
+      [(ngModel)]="VM.Elemento.productCategoryId" #productCategoryId="ngModel">
+      <option [value]="null"></option>
+      @for (item of VM.subcategorias; track item.key) {
+        <option [value]="item.key">{{item.value}}</option>
+      }
+    </select>
+    <label for="productCategoryId">Category:</label>
+  </div>
+  <div class="form-floating col-md-6">
+    <select class="form-control form-select" name="productModelId" id="productModelId"
+      [(ngModel)]="VM.Elemento.productModelId" #productModelId="ngModel">
+      <option [value]="null"></option>
+      @for (item of VM.modelos; track item.key) {
+        <option [value]="item.key">{{item.value}}</option>
+      }
+    </select>
+    <label for="productModelId">Model:</label>
+  </div>
+  <div class="form-floating col-md-4">
+    <input class="form-control" [class.is-invalid]="sellStartDate.invalid" type="datetime-local" name="sellStartDate"
+      id="sellStartDate" [(ngModel)]="VM.Elemento.sellStartDate" #sellStartDate="ngModel" placeholder="sellStartDate"
+      required>
+    <label for="sellStartDate">Start Date:</label>
+    <output class="invalid-feedback" [hidden]="sellStartDate.valid">{{sellStartDate.errors | errormsg}}</output>
+  </div>
+  <div class="form-floating col-md-4">
+    <input class="form-control" [class.is-invalid]="sellEndDate.invalid" type="datetime-local" name="sellEndDate"
+      id="sellEndDate" [(ngModel)]="VM.Elemento.sellEndDate" #sellEndDate="ngModel" placeholder="sellEndDate">
+    <label for="sellEndDate">End Date:</label>
+    <output class="invalid-feedback" [hidden]="sellEndDate.valid">{{sellEndDate.errors | errormsg}}</output>
+  </div>
+  <div class="form-floating col-md-4">
+    <input class="form-control" [class.is-invalid]="discontinuedDate.invalid" type="datetime-local"
+      name="discontinuedDate" id="discontinuedDate" [(ngModel)]="VM.Elemento.discontinuedDate"
+      #discontinuedDate="ngModel" placeholder="discontinuedDate">
+    <label for="discontinuedDate">Discontinued Date:</label>
+    <output class="invalid-feedback" [hidden]="discontinuedDate.valid">{{discontinuedDate.errors | errormsg}}</output>
+  </div>
+  <app-form-buttons (send)="VM.send()" [send-disabled]="miForm.invalid" (cancel)="VM.cancel()" />
+</form>
