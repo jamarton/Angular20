@@ -21,7 +21,7 @@ export class Notification {
 @Injectable({
   providedIn: 'root'
 })
-export class NotificationService implements OnDestroy  {
+export class NotificationService implements OnDestroy {
   public readonly NotificationType = NotificationType;
   private listado: Notification[] = [];
   private notificacion$ = new Subject<Notification>();

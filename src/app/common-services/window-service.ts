@@ -140,7 +140,7 @@ export class WindowService {
     this.rootViewContainerRef = viewContainerRef;
   }
 
-  alert(message: string, tipo? : NotificationType, titulo?: string, cerrar?: string ) {
+  alert(message: string, tipo?: NotificationType, titulo?: string, cerrar?: string) {
     const binds = [
       inputBinding('message', () => message),
       inputBinding('isConfirm', () => false),
@@ -157,8 +157,8 @@ export class WindowService {
     });
   }
 
-  confirm(message: string, callback: VoidFunction, tipo? : NotificationType, titulo?: string, aceptar?: string,
-    cancelar?: string ) {
+  confirm(message: string, callback: VoidFunction, tipo?: NotificationType, titulo?: string, aceptar?: string,
+    cancelar?: string) {
     const binds = [
       inputBinding('message', () => message),
       inputBinding('isConfirm', () => true),
