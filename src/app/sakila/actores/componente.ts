@@ -12,6 +12,8 @@ import { FormButtons } from '../../common-components';
 import { PeliculasListBody } from '../peliculas';
 import { environment } from 'src/environments/environment';
 import { ActoresDAOService } from '../daos-services';
+import { CommonComponentsModule } from "../../common-components/common-components.module";
+import { ListButtons } from "../../common-components/list-buttons";
 
 @Injectable({
   providedIn: 'root'
@@ -23,9 +25,8 @@ export class ActoresViewModelService extends ViewModelPagedService<any, number> 
 
   peliculas: any[] = []
 
-  public override view(key: number): void {
-    super.view(key);
-    (this.dao as ActoresDAOService).peliculas(key).subscribe({
+  public override afterView(): void {
+    (this.dao as ActoresDAOService).peliculas(this.elemento.id).subscribe({
       next: data => {
         this.peliculas = data //.map(item => ({filmId: item.key, title: item.value }));
       },
@@ -38,8 +39,7 @@ export class ActoresViewModelService extends ViewModelPagedService<any, number> 
   selector: 'app-actores-list',
   templateUrl: './tmpl-list.html',
   styleUrls: ['./componente.css'],
-  standalone: true,
-  imports: [RouterLink, Paginator, CommonModule, NormalizePipe, ]
+  imports: [RouterLink, Paginator, CommonModule, NormalizePipe, CommonComponentsModule, ListButtons]
 })
 export class ActoresList implements OnDestroy {
   readonly roleMantenimiento = environment.roleMantenimiento

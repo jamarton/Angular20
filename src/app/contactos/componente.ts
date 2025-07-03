@@ -9,7 +9,7 @@ import { ErrorMessagePipe, TypeValidator } from '@my/library';
 import { Subscription } from 'rxjs';
 import { Paginator } from '../common-components/paginator';
 import { HttpContext } from '@angular/common/http';
-import { RESTDAOService, ViewModelPagedService } from '../core';
+import { CancelOperationArg, RESTDAOService, ViewModelPagedService } from '../core';
 import { AUTH_REQUIRED } from '../security';
 
 export interface IContacto {
@@ -72,9 +72,15 @@ export class ContactosViewModelService extends ViewModelPagedService<Contacto, n
     this.rowsPerPage = 10
     this.orderBy = 'nombre,apellidos'
   }
+
   protected override afterAdd(): void {
       this.elemento = { id: 0, sexo: 'H'} as Contacto
   }
+
+  protected override beforeDelete(cancel: CancelOperationArg): void {
+      cancel.isCancel = !window.confirm('¿Seguro?')
+  }
+
   override imageErrorHandler(event: Event, item: any) {
     (event.target as HTMLImageElement).src = item.sexo === 'H' ? '/images/user-not-found-male.png' : '/images/user-not-found-female.png'
   }

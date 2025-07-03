@@ -10,6 +10,7 @@ import { ProductosDAOService, ModelosDAOService, CategoriasDAOService } from '..
 import { FormButtons } from '../../common-components';
 import { HttpParams } from '@angular/common/http';
 import { Paginator } from "../../common-components/paginator";
+import { NotificationType, WindowService } from 'src/app/common-services';
 
 @Component({
   selector: 'app-productos',
@@ -22,20 +23,19 @@ import { Paginator } from "../../common-components/paginator";
   providedIn: 'root'
 })
 export class ProductosViewModelService extends ViewModelPagedService<any, number> {
-  constructor(dao: ProductosDAOService, private daoModelos : ModelosDAOService, private daoCategorias: CategoriasDAOService
+  constructor(dao: ProductosDAOService, private daoModelos : ModelosDAOService, private daoCategorias: CategoriasDAOService, private window: WindowService
   ) {
     super(dao)
     this.rowsPerPage = 14;
   }
 
   public override view(key: any): void {
-    this.dao.get(key, { params: new HttpParams().set('mode', 'detail') }).subscribe({
-      next: data => {
-        this.elemento = data;
-        this.modo = 'view';
-      },
-      error: err => this.handleError(err)
-    });
+    super.view(key, { params: new HttpParams().set('mode', 'detail') })
+  }
+
+  public override delete(key: number, nextFn?: (hook?: boolean) => void): void {
+    this.window.confirm('Una vez borrado no se podrá recuperar. ¿Continuo?',
+      () => super.delete(key, nextFn), NotificationType.error, "Confirmación")
   }
 
   modelos: any[] = []

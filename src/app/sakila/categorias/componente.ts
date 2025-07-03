@@ -5,6 +5,7 @@ import { ViewModelService } from '../../core';
 import { FormsModule } from '@angular/forms';
 import { FormButtons } from '../../common-components';
 import { CategoriasDAOService } from '../daos-services';
+import { NotificationType, WindowService } from 'src/app/common-services';
 
 
 @Injectable({
@@ -12,13 +13,18 @@ import { CategoriasDAOService } from '../daos-services';
 })
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export class CategoriasViewModelService extends ViewModelService<any, number> {
-  constructor(dao: CategoriasDAOService) {
+  constructor(dao: CategoriasDAOService, private window: WindowService) {
     super(dao)
   }
   public override cancel(): void {
       this.clear()
       this.notify.clear()
       this.list()
+  }
+
+  public override delete(key: number, nextFn?: (hook?: boolean) => void): void {
+    this.window.confirm('Una vez borrado no se podrá recuperar. ¿Continuo?',
+      () => super.delete(key, nextFn), NotificationType.error, "Confirmación")
   }
 }
 

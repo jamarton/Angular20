@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ViewModelPagedService } from '../../core';
 import { PeliculasDAOService, IdiomasDAOService, ActoresDAOService, CategoriasDAOService } from '../daos-services';
+import { NotificationType, WindowService } from 'src/app/common-services';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class PeliculasViewModelService extends ViewModelPagedService<any, number
   readonly roleMantenimiento = environment.roleMantenimiento
 
   constructor(dao: PeliculasDAOService, protected daoIdiomas: IdiomasDAOService, protected daoCategorias: CategoriasDAOService,
-    protected daoActores: ActoresDAOService) {
+    protected daoActores: ActoresDAOService, private window: WindowService) {
     super(dao)
     // Soluciona el problema de las clases JavaScript por el cual los métodos pierden la referencia a this cuando se referencian por nombre (ExecPipe)
     this.dameActor = this.dameActor.bind(this)
@@ -20,14 +21,14 @@ export class PeliculasViewModelService extends ViewModelPagedService<any, number
   }
 
   public override view(key: any): void {
-    this.dao.get(key, { params: new HttpParams().set('mode', 'details') }).subscribe({
-      next: data => {
-        this.elemento = data;
-        this.modo = 'view';
-      },
-      error: err => this.handleError(err)
-    });
+    super.view(key, { params: new HttpParams().set('mode', 'details') })
   }
+
+  public override delete(key: number, nextFn?: (hook?: boolean) => void): void {
+    this.window.confirm('Una vez borrado no se podrá recuperar. ¿Continuo?',
+      () => super.delete(key, nextFn), NotificationType.error, "Confirmación")
+  }
+
   // Filtrado
 
   private filtro: any = { title: '', minlength: '', maxlength: '', rating: '' }
@@ -47,11 +48,11 @@ export class PeliculasViewModelService extends ViewModelPagedService<any, number
   }
 
   protected override afterAdd(): void {
-      this.elemento = { rating: 'G' }
-      this.cargaListas()
+    this.elemento = { rating: 'G' }
+    this.cargaListas()
   }
   protected override afterEdit(): void {
-      this.cargaListas()
+    this.cargaListas()
   }
   // Formularios
 
@@ -107,7 +108,7 @@ export class PeliculasViewModelService extends ViewModelPagedService<any, number
 
   private cargaClasificaciones() {
     if (this.clasificaciones.length === 0) {
-      this.clasificaciones = [{id:'', categoria: ''}];
+      this.clasificaciones = [{ id: '', categoria: '' }];
       (this.dao as PeliculasDAOService).clasificaciones().subscribe({
         next: data => {
           this.clasificaciones = data;

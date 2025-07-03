@@ -14,10 +14,7 @@
           <a class="btn btn-link btn-lg px-0" routerLink="{{item.id}}/{{item.nombre | normalize | lowercase}}">{{item.nombre | titlecase}}</a>
         </td>
         <td class="align-middle text-end">
-          <div class="btn-group" role="group">
-            <button class="btn btn-success" [routerLink]="[item.id, 'edit']" *ngIf="VM.auth.isInRoles(roleMantenimiento)"><i class="fas fa-pen"></i></button>
-            <button class="btn btn-danger" (click)="VM.delete(item.id)" *ngIf="VM.auth.isInRoles(roleMantenimiento)"><i class="far fa-trash-alt"></i></button>
-          </div>
+          <app-list-buttons [can-edit]="true" [editLink]="[item.id, 'edit']" [can-delete]="true" (delete)="VM.delete(item.id)" />
         </td>
       </tr>
     }

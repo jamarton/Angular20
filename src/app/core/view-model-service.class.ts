@@ -12,9 +12,9 @@ export abstract class ViewModelService<T, K> {
   protected listado: T[] = [];
   protected elemento: T | null = null;
   protected idOriginal: K | null = null;
-  protected out = inject(LoggerService)
-  protected router = inject(Router)
-  protected navigation = inject(NavigationService)
+  public out = inject(LoggerService)
+  public router = inject(Router)
+  public navigation = inject(NavigationService)
   public notify = inject(NotificationService)
   public auth = inject(AuthService)
 
@@ -74,7 +74,8 @@ export abstract class ViewModelService<T, K> {
       error: err => this.handleError(err)
     });
   }
-  public delete(key: K, nextFn = this.cancel): void {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public delete(key: K, nextFn: (arg?: any) => void = this.list): void {
     const arg = new CancelOperationArg()
     this.beforeDelete(arg)
     if (arg.isCancel) return;
@@ -233,5 +234,9 @@ export abstract class ViewModelPagedService<T, K> extends ViewModelService<T, K>
 
   pageChange(page: number = 0) {
     this.router.navigate([], { queryParams: { page } })
+  }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  override delete(key: K, nextFn: (arg?: any) => void = this.load): void {
+      super.delete(key, nextFn)
   }
 }
