@@ -16,7 +16,7 @@
         </div>
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-            @for(item of menu(); track item.path) {
+            @for(item of menu(); track item) {
             @if(item.visible && item.children) {
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" [routerLink]="item.path" role="button" data-bs-toggle="dropdown"

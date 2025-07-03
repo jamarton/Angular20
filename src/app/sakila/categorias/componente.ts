@@ -2,9 +2,9 @@ import { Injectable, Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ErrorMessagePipe, NotblankValidator } from '@my/library';
 import { ViewModelService } from '../../core';
-import { CategoriasDAOService } from '../../common-services';
 import { FormsModule } from '@angular/forms';
 import { FormButtons } from '../../common-components';
+import { CategoriasDAOService } from '../daos-services';
 
 
 @Injectable({
