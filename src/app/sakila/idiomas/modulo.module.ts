@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { IdiomasComponent } from './componente.component';
+import { IdiomasComponent } from './componente';
 
 export const routes: Routes = [
   { path: '', component: IdiomasComponent },

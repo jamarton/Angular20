@@ -2,14 +2,14 @@
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
-import { LoggerService } from '@my/core';
-import { ActoresDAOService, NavigationService, NotificationService } from '../common-services';
+import { LoggerService } from '@my/library';
+import { ActoresDAOService, NavigationService, NotificationService } from '../../common-services';
 
 import { NO_ERRORS_SCHEMA, Type } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ACTORES_COMPONENTES, ActoresViewModelService } from './componente.component';
+import { ACTORES_COMPONENTES, ActoresViewModelService } from './componente';
 import { environment } from 'src/environments/environment';
-import { DAOServiceMock } from '../code-base';
+import { DAOServiceMock } from '../../core';
 import { provideLocationMocks } from '@angular/common/testing';
 import { provideRouter } from '@angular/router';
 import { Observable, of } from 'rxjs';

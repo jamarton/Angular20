@@ -4,10 +4,10 @@ import { Component, Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { NotificationService } from '../common-services';
+import { NotificationService } from '../../common-services';
 import { PeliculasListBodyComponent } from '../peliculas';
 import { FormsModule } from '@angular/forms';
-import { ErrorMessagePipe, PastOrPresentValidator } from '@my/core';
+import { ErrorMessagePipe, PastOrPresentValidator } from '@my/library';
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +25,8 @@ export class NovedadesDAOService {
   selector: 'app-novedades',
   standalone: true,
   imports: [PeliculasListBodyComponent, FormsModule, PastOrPresentValidator, ErrorMessagePipe],
-  templateUrl: './novedades.component.html',
-  styleUrls: ['./novedades.component.css']
+  templateUrl: './novedades.html',
+  styleUrls: ['./novedades.css']
 })
 export class NovedadesComponent implements OnInit {
   novedades: any = {}

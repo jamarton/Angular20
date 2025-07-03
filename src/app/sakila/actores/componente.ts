@@ -4,13 +4,13 @@ import { CommonModule } from '@angular/common';
 import { Injectable, Component, OnChanges, OnDestroy, Input, SimpleChanges, OnInit, effect, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { LoggerService, ErrorMessagePipe, NormalizePipe, NotblankValidator, UppercaseValidator, TypeValidator } from '@my/core';
+import { LoggerService, ErrorMessagePipe, NormalizePipe, NotblankValidator, UppercaseValidator, TypeValidator } from '@my/library';
 import { PaginatorModule } from 'primeng/paginator';
-import { ViewModelService } from '../code-base';
-import { FormButtonsComponent } from '../common-components';
-import { ActoresDAOService, NotificationService, NavigationService } from '../common-services';
+import { ViewModelService } from '../../core';
+import { FormButtonsComponent } from '../../common-components';
+import { ActoresDAOService, NotificationService, NavigationService } from '../../common-services';
 import { PeliculasListBodyComponent } from '../peliculas';
-import { AuthService } from '../security';
+import { AuthService } from '../../security';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -54,8 +54,8 @@ export class ActoresViewModelService extends ViewModelService<any, number> {
 
 @Component({
   selector: 'app-actores-list',
-  templateUrl: './tmpl-list.component.html',
-  styleUrls: ['./componente.component.css'],
+  templateUrl: './tmpl-list.html',
+  styleUrls: ['./componente.css'],
   standalone: true,
   imports: [RouterLink, PaginatorModule, CommonModule, NormalizePipe, ]
 })
@@ -74,8 +74,8 @@ export class ActoresListComponent implements OnDestroy {
 
 @Component({
   selector: 'app-actores-add',
-  templateUrl: './tmpl-form.component.html',
-  styleUrls: ['./componente.component.css'],
+  templateUrl: './tmpl-form.html',
+  styleUrls: ['./componente.css'],
   standalone: true,
   imports: [FormsModule, CommonModule, ErrorMessagePipe, NotblankValidator, UppercaseValidator, TypeValidator, FormButtonsComponent]
 })
@@ -89,8 +89,8 @@ export class ActoresAddComponent implements OnInit {
 
 @Component({
   selector: 'app-actores-edit',
-  templateUrl: './tmpl-form.component.html',
-  styleUrls: ['./componente.component.css'],
+  templateUrl: './tmpl-form.html',
+  styleUrls: ['./componente.css'],
   standalone: true,
   imports: [FormsModule, CommonModule, ErrorMessagePipe, NotblankValidator, UppercaseValidator, TypeValidator, FormButtonsComponent]
 })
@@ -109,8 +109,8 @@ export class ActoresEditComponent implements OnChanges {
 
 @Component({
   selector: 'app-actores-view',
-  templateUrl: './tmpl-view.component.html',
-  styleUrls: ['./componente.component.css'],
+  templateUrl: './tmpl-view.html',
+  styleUrls: ['./componente.css'],
   standalone: true,
   imports: [ FormButtonsComponent, PeliculasListBodyComponent, ]
 })

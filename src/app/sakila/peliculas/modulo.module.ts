@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PELICULAS_COMPONENTES, PeliculasAddComponent, PeliculasEditComponent, PeliculasViewComponent, PeliculasListComponent } from './componente.component';
-import { AuthWithRedirectCanActivate, InRoleCanActivate } from '../security';
+import { PELICULAS_COMPONENTES, PeliculasAddComponent, PeliculasEditComponent, PeliculasViewComponent, PeliculasListComponent } from './componente';
+import { AuthWithRedirectCanActivate, InRoleCanActivate } from '../../security';
 import { environment } from '../../environments/environment';
 
 export const routes: Routes = [

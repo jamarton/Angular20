@@ -1,11 +1,11 @@
 import { Injectable, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoggerService, ErrorMessagePipe, NotblankValidator } from '@my/core';
-import { ViewModelService } from '../code-base';
-import { FormButtonsComponent } from '../common-components';
-import { IdiomasDAOService, NotificationService, NavigationService } from '../common-services';
-import { AuthService } from '../security';
+import { LoggerService, ErrorMessagePipe, NotblankValidator } from '@my/library';
+import { ViewModelService } from '../../core';
+import { FormButtonsComponent } from '../../common-components';
+import { IdiomasDAOService, NotificationService, NavigationService } from '../../common-services';
+import { AuthService } from '../../security';
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +25,8 @@ export class IdiomasViewModelService extends ViewModelService<any, number> {
 
 @Component({
   selector: 'app-idiomas',
-  templateUrl: './tmpl-anfitrion.component.html',
-  styleUrls: ['./componente.component.css'],
+  templateUrl: './tmpl-anfitrion.html',
+  styleUrls: ['./componente.css'],
   standalone: true,
   imports: [FormsModule, FormButtonsComponent, ErrorMessagePipe, NotblankValidator,],
 })

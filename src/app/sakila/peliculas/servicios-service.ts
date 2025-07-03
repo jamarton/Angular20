@@ -2,11 +2,11 @@
 import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoggerService } from '@my/core';
+import { LoggerService } from '@my/library';
 import { environment } from 'src/environments/environment';
-import { ViewModelService } from '../code-base';
-import { NotificationService, NavigationService, PeliculasDAOService, IdiomasDAOService, CategoriasDAOService, ActoresDAOService } from '../common-services';
-import { AuthService } from '../security';
+import { ViewModelService } from '../../core';
+import { NotificationService, NavigationService, PeliculasDAOService, IdiomasDAOService, CategoriasDAOService, ActoresDAOService } from '../../common-services';
+import { AuthService } from '../../security';
 
 @Injectable({
   providedIn: 'root'

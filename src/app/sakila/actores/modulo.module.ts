@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ACTORES_COMPONENTES, ActoresAddComponent, ActoresEditComponent, ActoresListComponent, ActoresViewComponent } from './componente.component';
+import { ACTORES_COMPONENTES, ActoresAddComponent, ActoresEditComponent, ActoresListComponent, ActoresViewComponent } from './componente';
 import { environment } from 'src/environments/environment';
-import { AuthWithRedirectCanActivate, InRoleCanActivate } from '../security';
+import { AuthWithRedirectCanActivate, InRoleCanActivate } from '../../security';
 
 export const routes: Routes = [
   { path: '', component: ActoresListComponent },

@@ -2,16 +2,16 @@ import { Component, OnInit, OnDestroy, Input, OnChanges, SimpleChanges, Output, 
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { PeliculasViewModelService } from './servicios.service';
 
-import { ErrorMessagePipe, ExecPipe, NormalizePipe, NotblankValidator, TypeValidator } from '@my/core';
+import { ErrorMessagePipe, ExecPipe, NormalizePipe, NotblankValidator, TypeValidator } from '@my/library';
 import { CommonModule } from '@angular/common';
 import { PaginatorModule } from 'primeng/paginator';
 import { FormsModule } from '@angular/forms';
-import { FormButtonsComponent } from '../common-components';
+import { FormButtonsComponent } from '../../common-components';
 
 @Component({
   selector: 'app-peliculas-list-body',
-  templateUrl: './tmpl-list-body.component.html',
-  styleUrls: ['./componente.component.css'],
+  templateUrl: './tmpl-list-body.html',
+  styleUrls: ['./componente.css'],
   standalone: true,
   imports: [RouterLink, NormalizePipe, CommonModule, ]
 })
@@ -28,8 +28,8 @@ export class PeliculasListBodyComponent {
 
 @Component({
   selector: 'app-peliculas-list',
-  templateUrl: './tmpl-list.component.html',
-  styleUrls: ['./componente.component.css'],
+  templateUrl: './tmpl-list.html',
+  styleUrls: ['./componente.css'],
   standalone: true,
   imports: [RouterLink, PaginatorModule, PeliculasListBodyComponent, FormsModule, ErrorMessagePipe ],
 })
@@ -60,8 +60,8 @@ export class PeliculasListComponent implements OnChanges, OnDestroy {
 
 @Component({
   selector: 'app-peliculas-add',
-  templateUrl: './tmpl-form.component.html',
-  styleUrls: ['./componente.component.css'],
+  templateUrl: './tmpl-form.html',
+  styleUrls: ['./componente.css'],
   standalone: true,
   imports: [FormsModule, CommonModule, ErrorMessagePipe, NotblankValidator, TypeValidator, FormButtonsComponent, ExecPipe, ]
 })
@@ -75,8 +75,8 @@ export class PeliculasAddComponent implements OnInit {
 
 @Component({
   selector: 'app-peliculas-edit',
-  templateUrl: './tmpl-form.component.html',
-  styleUrls: ['./componente.component.css'],
+  templateUrl: './tmpl-form.html',
+  styleUrls: ['./componente.css'],
   standalone: true,
   imports: [FormsModule, CommonModule, ErrorMessagePipe, NotblankValidator, TypeValidator, FormButtonsComponent, ExecPipe, ]
 })
@@ -95,8 +95,8 @@ export class PeliculasEditComponent implements OnChanges {
 
 @Component({
   selector: 'app-peliculas-view',
-  templateUrl: './tmpl-view.component.html',
-  styleUrls: ['./componente.component.css'],
+  templateUrl: './tmpl-view.html',
+  styleUrls: ['./componente.css'],
   standalone: true,
   imports: [RouterLink, CommonModule, FormButtonsComponent, ]
 })
@@ -114,8 +114,8 @@ export class PeliculasViewComponent {
 
 @Component({
   selector: 'app-peliculas',
-  templateUrl: './tmpl-anfitrion.component.html',
-  styleUrls: ['./componente.component.css'],
+  templateUrl: './tmpl-anfitrion.html',
+  styleUrls: ['./componente.css'],
   standalone: true,
   imports: [PeliculasListComponent, PeliculasAddComponent, PeliculasEditComponent, PeliculasViewComponent, ],
 })

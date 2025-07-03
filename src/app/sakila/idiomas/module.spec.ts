@@ -3,13 +3,13 @@ import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 import { environment } from 'src/environments/environment';
-import { LoggerService } from '@my/core';
-import { DAOServiceMock } from '../code-base';
-import { IdiomasDAOService, NavigationService, NotificationService } from '../common-services';
+import { LoggerService } from '@my/library';
+import { DAOServiceMock } from '../../core';
+import { IdiomasDAOService, NavigationService, NotificationService } from '../../common-services';
 
 import { NO_ERRORS_SCHEMA, Type } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IDIOMAS_COMPONENTES, IdiomasViewModelService } from './componente.component';
+import { IDIOMAS_COMPONENTES, IdiomasViewModelService } from './componente';
 import { provideLocationMocks } from '@angular/common/testing';
 import { provideRouter } from '@angular/router';
 

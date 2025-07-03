@@ -1,11 +1,11 @@
 import { Injectable, Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { ErrorMessagePipe, LoggerService, NotblankValidator } from '@my/core';
-import { ViewModelService } from '../code-base';
-import { CategoriasDAOService, NotificationService, NavigationService } from '../common-services';
-import { AuthService } from '../security';
+import { ErrorMessagePipe, LoggerService, NotblankValidator } from '@my/library';
+import { ViewModelService } from '../../core';
+import { CategoriasDAOService, NotificationService, NavigationService } from '../../common-services';
+import { AuthService } from '../../security';
 import { FormsModule } from '@angular/forms';
-import { FormButtonsComponent } from '../common-components';
+import { FormButtonsComponent } from '../../common-components';
 
 
 @Injectable({
@@ -26,8 +26,8 @@ export class CategoriasViewModelService extends ViewModelService<any, number> {
 
 @Component({
   selector: 'app-categorias',
-  templateUrl: './tmpl-anfitrion.component.html',
-  styleUrls: ['./componente.component.css'],
+  templateUrl: './tmpl-anfitrion.html',
+  styleUrls: ['./componente.css'],
   standalone: true,
   imports: [ FormsModule, RouterLink, FormButtonsComponent, ErrorMessagePipe, NotblankValidator, ]
 })
