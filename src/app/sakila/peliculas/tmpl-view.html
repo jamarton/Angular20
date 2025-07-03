@@ -3,7 +3,7 @@
   <span class="position-relative badge rounded-pill bg-danger mt-2 fs-6" style="margin-left: -1rem">{{VM.Elemento.rating}}</span>
   @if (VM.auth.isInRoles(VM.roleMantenimiento)) {
     <a class="btn btn-link"
-      [routerLink]="['/', 'catalogo', VM.Elemento.filmId,'edit']"><svg class="bi flex-shrink-0 me-2 text-primary"
+      [routerLink]="['/sakila', 'catalogo', VM.Elemento.filmId,'edit']"><svg class="bi flex-shrink-0 me-2 text-primary"
       width="24" height="24" role="img" aria-label="editar">
       <use xlink:href="images/crud-sprite.svg#pen-fill" />
     </svg>

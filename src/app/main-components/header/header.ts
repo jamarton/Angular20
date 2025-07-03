@@ -57,7 +57,7 @@ export class Header implements OnDestroy {
         { texto: 'Modelos', icono: 'fa-solid fa-shirt', path: '/tienda/modelos', visible: true },
       ], visible: this.auth.isInRoles(this.roleMantenimiento) },
       { texto: 'Sakila', icono: 'fa-solid fa-tv', children: [
-        { texto: 'Novedades', icono: 'fa-solid fa-calendar-plus', path: '/sakila/novedades', visible: true },
+        { texto: 'Novedades', icono: 'fa-solid fa-calendar-plus', path: '/sakila', visible: true },
         { texto: 'Catalogo', icono: 'fa-solid fa-film', path: '/sakila/catalogo', visible: true },
         { texto: 'Categorias', icono: 'fa-solid fa-list', path: this.auth.isInRoles(this.roleMantenimiento) ? '/sakila/categorias' : '/sakila/catalogo/categorias', visible: true },
         { texto: 'Actores', icono: 'fa-solid fa-person-rays', path: '/sakila/actores', visible: true },

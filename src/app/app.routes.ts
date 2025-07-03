@@ -29,10 +29,10 @@ export const routes: Routes = [
   { matcher: svgFiles, loadComponent: () => import('./ejemplos/grafico-svg/grafico-svg')},
   { path: 'config', loadChildren: () => import('./config/config'), title: 'Configuración', canActivateChild: [AuthCanActivateFn]},
 
-  { path: 'sakila/novedades', pathMatch: 'full', component: Novedades, title: 'novedades' },
-  { path: 'sakila/catalogo/categorias', component: PeliculasList, data: { search: 'categorias' }, title: 'categorias' },
+  { path: 'sakila', pathMatch: 'full', component: Novedades, title: 'novedades' },
+  { path: 'sakila/catalogo/categorias', pathMatch: 'full', component: PeliculasList, data: { search: 'categorias' }, title: 'categorias' },
   { path: 'sakila/catalogo/categorias/:idPeli/:tit', redirectTo: '/sakila/catalogo/:idPeli/:tit', title: 'catalogo' },
-  { path: 'sakila/catalogo', pathMatch: 'full', children: peliculasRoutes, title: 'catalogo' },
+  { path: 'sakila/catalogo', children: peliculasRoutes, title: 'catalogo' },
   { path: 'sakila/actores/:id/:nom/:idPeli/:tit', redirectTo: '/sakila/catalogo/:idPeli/:tit', title: 'catalogo' },
   {
     path: 'sakila/actores', children: actoresRoutes, title: 'actores'
