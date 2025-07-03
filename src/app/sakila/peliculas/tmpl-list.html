@@ -65,7 +65,5 @@
 }
 <app-peliculas-list-body [Listado]="VM.Listado" (imageError)="VM.imageErrorHandler($event)" />
 @if (pagina && VM.totalRows > 0) {
-  <p-paginator [first]="VM.rowsPerPage*VM.page" [rows]="VM.rowsPerPage" [totalRecords]="VM.totalRows" [pageLinkSize]="5"
-    (onPageChange)="VM.rowsPerPage=$event.rows??12; VM.pageChange($event.page);" [rowsPerPageOptions]="[12, 24, 48, 96]"
-    [showCurrentPageReport]="true" currentPageReportTemplate="{first} - {last} de {totalRecords}" />
+<app-paginator [actual]="VM.page" [ultima]="VM.totalPages" (page-change)="VM.pageChange($event)" />
 }

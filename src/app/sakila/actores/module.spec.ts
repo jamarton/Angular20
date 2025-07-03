@@ -3,7 +3,7 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 import { LoggerService } from '@my/library';
-import { ActoresDAOService, NavigationService, NotificationService } from '../../common-services';
+import { NavigationService, NotificationService } from '../../common-services';
 
 import { NO_ERRORS_SCHEMA, Type } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -13,6 +13,7 @@ import { DAOServiceMock } from '../../core';
 import { provideLocationMocks } from '@angular/common/testing';
 import { provideRouter } from '@angular/router';
 import { Observable, of } from 'rxjs';
+import { ActoresDAOService } from '../daos-services';
 export interface Actor {
   id: number
   nombre: string

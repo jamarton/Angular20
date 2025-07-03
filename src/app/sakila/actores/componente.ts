@@ -4,39 +4,21 @@ import { CommonModule } from '@angular/common';
 import { Injectable, Component, OnChanges, OnDestroy, Input, SimpleChanges, OnInit, effect, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { LoggerService, ErrorMessagePipe, NormalizePipe, NotblankValidator, UppercaseValidator, TypeValidator } from '@my/library';
-import { PaginatorModule } from 'primeng/paginator';
-import { ViewModelService } from '../../core';
-import { FormButtonsComponent } from '../../common-components';
-import { ActoresDAOService, NotificationService, NavigationService } from '../../common-services';
-import { PeliculasListBodyComponent } from '../peliculas';
-import { AuthService } from '../../security';
+import { ErrorMessagePipe, NormalizePipe, NotblankValidator, UppercaseValidator, TypeValidator } from '@my/library';
+import { Paginator } from '../../common-components/paginator';
+
+import { ViewModelPagedService } from '../../core';
+import { FormButtons } from '../../common-components';
+import { PeliculasListBody } from '../peliculas';
 import { environment } from 'src/environments/environment';
+import { ActoresDAOService } from '../daos-services';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ActoresViewModelService extends ViewModelService<any, number> {
-  constructor(dao: ActoresDAOService, notify: NotificationService, out: LoggerService,
-    auth: AuthService, router: Router, navigation: NavigationService) {
-    super(dao, {}, notify, out, auth, router, navigation)
-  }
-  page = 0;
-  totalPages = 0;
-  totalRows = 0;
-  rowsPerPage = 10;
-  load(page: number = -1) {
-    if (!page || page < 0) page = this.page;
-    (this.dao as ActoresDAOService).page(page, this.rowsPerPage).subscribe({
-      next: rslt => {
-        this.page = rslt.page;
-        this.totalPages = rslt.pages;
-        this.totalRows = rslt.rows;
-        this.listado = rslt.list;
-        this.modo = 'list';
-      },
-      error: err => this.handleError(err)
-    })
+export class ActoresViewModelService extends ViewModelPagedService<any, number> {
+  constructor(dao: ActoresDAOService) {
+    super(dao)
   }
 
   peliculas: any[] = []
@@ -57,9 +39,9 @@ export class ActoresViewModelService extends ViewModelService<any, number> {
   templateUrl: './tmpl-list.html',
   styleUrls: ['./componente.css'],
   standalone: true,
-  imports: [RouterLink, PaginatorModule, CommonModule, NormalizePipe, ]
+  imports: [RouterLink, Paginator, CommonModule, NormalizePipe, ]
 })
-export class ActoresListComponent implements OnDestroy {
+export class ActoresList implements OnDestroy {
   readonly roleMantenimiento = environment.roleMantenimiento
   readonly page = input(0);
 
@@ -77,9 +59,9 @@ export class ActoresListComponent implements OnDestroy {
   templateUrl: './tmpl-form.html',
   styleUrls: ['./componente.css'],
   standalone: true,
-  imports: [FormsModule, CommonModule, ErrorMessagePipe, NotblankValidator, UppercaseValidator, TypeValidator, FormButtonsComponent]
+  imports: [FormsModule, CommonModule, ErrorMessagePipe, NotblankValidator, UppercaseValidator, TypeValidator, FormButtons]
 })
-export class ActoresAddComponent implements OnInit {
+export class ActoresAdd implements OnInit {
   constructor(protected vm: ActoresViewModelService) { }
   public get VM(): ActoresViewModelService { return this.vm; }
   ngOnInit(): void {
@@ -92,9 +74,9 @@ export class ActoresAddComponent implements OnInit {
   templateUrl: './tmpl-form.html',
   styleUrls: ['./componente.css'],
   standalone: true,
-  imports: [FormsModule, CommonModule, ErrorMessagePipe, NotblankValidator, UppercaseValidator, TypeValidator, FormButtonsComponent]
+  imports: [FormsModule, CommonModule, ErrorMessagePipe, NotblankValidator, UppercaseValidator, TypeValidator, FormButtons]
 })
-export class ActoresEditComponent implements OnChanges {
+export class ActoresEdit implements OnChanges {
   @Input() id?: string;
   constructor(protected vm: ActoresViewModelService, protected router: Router) { }
   public get VM(): ActoresViewModelService { return this.vm; }
@@ -112,9 +94,9 @@ export class ActoresEditComponent implements OnChanges {
   templateUrl: './tmpl-view.html',
   styleUrls: ['./componente.css'],
   standalone: true,
-  imports: [ FormButtonsComponent, PeliculasListBodyComponent, ]
+  imports: [ FormButtons, PeliculasListBody, ]
 })
-export class ActoresViewComponent {
+export class ActoresView {
   constructor(protected vm: ActoresViewModelService, protected router: Router) { }
   public get VM(): ActoresViewModelService { return this.vm; }
   @Input() set id(key: string) {
@@ -127,4 +109,4 @@ export class ActoresViewComponent {
 }
 
 
-export const ACTORES_COMPONENTES = [ActoresListComponent, ActoresAddComponent, ActoresEditComponent, ActoresViewComponent,];
+export const ACTORES_COMPONENTES = [ActoresList, ActoresAdd, ActoresEdit, ActoresView,];

@@ -1,21 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PELICULAS_COMPONENTES, PeliculasAddComponent, PeliculasEditComponent, PeliculasViewComponent, PeliculasListComponent } from './componente';
+import { PELICULAS_COMPONENTES, PeliculasAdd, PeliculasEdit, PeliculasView, PeliculasList } from './componente';
 import { AuthWithRedirectCanActivate, InRoleCanActivate } from '../../security';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 export const routes: Routes = [
-  { path: '', component: PeliculasListComponent },
+  { path: '', component: PeliculasList },
   {
-    path: 'add', component: PeliculasAddComponent,
+    path: 'add', component: PeliculasAdd,
     canActivate: [AuthWithRedirectCanActivate('/login'), InRoleCanActivate(environment.roleMantenimiento)]
   },
   {
-    path: ':id/edit', component: PeliculasEditComponent,
+    path: ':id/edit', component: PeliculasEdit,
     canActivate: [AuthWithRedirectCanActivate('/login'), InRoleCanActivate(environment.roleMantenimiento)]
   },
-  { path: ':id', component: PeliculasViewComponent },
-  { path: ':id/:kk', component: PeliculasViewComponent },
+  { path: ':id', component: PeliculasView },
+  { path: ':id/:kk', component: PeliculasView },
 ];
 
 @NgModule({

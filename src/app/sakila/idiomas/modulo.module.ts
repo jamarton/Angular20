@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { IdiomasComponent } from './componente';
+import { Idiomas } from './componente';
 
 export const routes: Routes = [
-  { path: '', component: IdiomasComponent },
+  { path: '', component: Idiomas },
 ];
 
 @NgModule({
@@ -12,7 +12,7 @@ export const routes: Routes = [
     RouterModule
   ],
   imports: [
-    RouterModule.forChild(routes), IdiomasComponent,
+    RouterModule.forChild(routes), Idiomas,
   ]
 })
 export default class IdiomasModule { }

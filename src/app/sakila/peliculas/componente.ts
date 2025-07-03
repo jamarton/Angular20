@@ -1,12 +1,13 @@
 import { Component, OnInit, OnDestroy, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { PeliculasViewModelService } from './servicios.service';
+import { PeliculasViewModelService } from './servicios-service';
 
 import { ErrorMessagePipe, ExecPipe, NormalizePipe, NotblankValidator, TypeValidator } from '@my/library';
 import { CommonModule } from '@angular/common';
-import { PaginatorModule } from 'primeng/paginator';
+import { Paginator } from '../../common-components/paginator';
+
 import { FormsModule } from '@angular/forms';
-import { FormButtonsComponent } from '../../common-components';
+import { FormButtons } from '../../common-components';
 
 @Component({
   selector: 'app-peliculas-list-body',
@@ -15,7 +16,7 @@ import { FormButtonsComponent } from '../../common-components';
   standalone: true,
   imports: [RouterLink, NormalizePipe, CommonModule, ]
 })
-export class PeliculasListBodyComponent {
+export class PeliculasListBody {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Input({required: true}) Listado: any[] = []
   @Input() urlBase = ''
@@ -31,9 +32,9 @@ export class PeliculasListBodyComponent {
   templateUrl: './tmpl-list.html',
   styleUrls: ['./componente.css'],
   standalone: true,
-  imports: [RouterLink, PaginatorModule, PeliculasListBodyComponent, FormsModule, ErrorMessagePipe ],
+  imports: [RouterLink, Paginator, PeliculasListBody, FormsModule, ErrorMessagePipe ],
 })
-export class PeliculasListComponent implements OnChanges, OnDestroy {
+export class PeliculasList implements OnChanges, OnDestroy {
   @Input() page = 0
   @Input() search = ''
   @Input() categoria? : number
@@ -63,9 +64,9 @@ export class PeliculasListComponent implements OnChanges, OnDestroy {
   templateUrl: './tmpl-form.html',
   styleUrls: ['./componente.css'],
   standalone: true,
-  imports: [FormsModule, CommonModule, ErrorMessagePipe, NotblankValidator, TypeValidator, FormButtonsComponent, ExecPipe, ]
+  imports: [FormsModule, CommonModule, ErrorMessagePipe, NotblankValidator, TypeValidator, FormButtons, ExecPipe, ]
 })
-export class PeliculasAddComponent implements OnInit {
+export class PeliculasAdd implements OnInit {
   constructor(protected vm: PeliculasViewModelService) { }
   public get VM(): PeliculasViewModelService { return this.vm; }
   ngOnInit(): void {
@@ -78,9 +79,9 @@ export class PeliculasAddComponent implements OnInit {
   templateUrl: './tmpl-form.html',
   styleUrls: ['./componente.css'],
   standalone: true,
-  imports: [FormsModule, CommonModule, ErrorMessagePipe, NotblankValidator, TypeValidator, FormButtonsComponent, ExecPipe, ]
+  imports: [FormsModule, CommonModule, ErrorMessagePipe, NotblankValidator, TypeValidator, FormButtons, ExecPipe, ]
 })
-export class PeliculasEditComponent implements OnChanges {
+export class PeliculasEdit implements OnChanges {
   @Input() id?: string;
   constructor(protected vm: PeliculasViewModelService, protected router: Router) { }
   public get VM(): PeliculasViewModelService { return this.vm; }
@@ -98,9 +99,9 @@ export class PeliculasEditComponent implements OnChanges {
   templateUrl: './tmpl-view.html',
   styleUrls: ['./componente.css'],
   standalone: true,
-  imports: [RouterLink, CommonModule, FormButtonsComponent, ]
+  imports: [RouterLink, CommonModule, FormButtons, ]
 })
-export class PeliculasViewComponent {
+export class PeliculasView {
   constructor(protected vm: PeliculasViewModelService, protected router: Router) { }
   public get VM(): PeliculasViewModelService { return this.vm; }
   @Input() set id(key: string) {
@@ -117,9 +118,9 @@ export class PeliculasViewComponent {
   templateUrl: './tmpl-anfitrion.html',
   styleUrls: ['./componente.css'],
   standalone: true,
-  imports: [PeliculasListComponent, PeliculasAddComponent, PeliculasEditComponent, PeliculasViewComponent, ],
+  imports: [PeliculasList, PeliculasAdd, PeliculasEdit, PeliculasView, ],
 })
-export class PeliculasComponent implements OnInit, OnDestroy {
+export class Peliculas implements OnInit, OnDestroy {
   constructor(protected vm: PeliculasViewModelService, private route: ActivatedRoute) { }
   public get VM(): PeliculasViewModelService { return this.vm; }
   ngOnInit(): void {
@@ -140,6 +141,6 @@ export class PeliculasComponent implements OnInit, OnDestroy {
 }
 
 export const PELICULAS_COMPONENTES = [
-  PeliculasComponent, PeliculasListComponent, PeliculasAddComponent,
-  PeliculasEditComponent, PeliculasViewComponent, PeliculasListBodyComponent,
+  Peliculas, PeliculasList, PeliculasAdd,
+  PeliculasEdit, PeliculasView, PeliculasListBody,
 ];

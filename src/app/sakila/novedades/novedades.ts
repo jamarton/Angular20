@@ -3,9 +3,9 @@ import { Component, Injectable, OnInit } from '@angular/core';
 
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { NotificationService } from '../../common-services';
-import { PeliculasListBodyComponent } from '../peliculas';
+import { PeliculasListBody } from '../peliculas';
 import { FormsModule } from '@angular/forms';
 import { ErrorMessagePipe, PastOrPresentValidator } from '@my/library';
 
@@ -24,11 +24,11 @@ export class NovedadesDAOService {
 @Component({
   selector: 'app-novedades',
   standalone: true,
-  imports: [PeliculasListBodyComponent, FormsModule, PastOrPresentValidator, ErrorMessagePipe],
+  imports: [PeliculasListBody, FormsModule, PastOrPresentValidator, ErrorMessagePipe],
   templateUrl: './novedades.html',
   styleUrls: ['./novedades.css']
 })
-export class NovedadesComponent implements OnInit {
+export class Novedades implements OnInit {
   novedades: any = {}
   fecha = '2021-01-01'
   constructor(private dao: NovedadesDAOService, private notify: NotificationService) {

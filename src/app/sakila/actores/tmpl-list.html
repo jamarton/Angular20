@@ -16,12 +16,11 @@
         <td class="align-middle text-end">
           <div class="btn-group" role="group">
             <button class="btn btn-success" [routerLink]="[item.id, 'edit']" *ngIf="VM.auth.isInRoles(roleMantenimiento)"><i class="fas fa-pen"></i></button>
-            <button class="btn btn-danger" (click)="VM.delete(item.id, VM.load)" *ngIf="VM.auth.isInRoles(roleMantenimiento)"><i class="far fa-trash-alt"></i></button>
+            <button class="btn btn-danger" (click)="VM.delete(item.id)" *ngIf="VM.auth.isInRoles(roleMantenimiento)"><i class="far fa-trash-alt"></i></button>
           </div>
         </td>
       </tr>
     }
   </tbody>
 </table>
-<p-paginator [first]="VM.rowsPerPage*VM.page" [rows]="VM.rowsPerPage" [totalRecords]="VM.totalRows"
-[pageLinkSize]="5" (onPageChange)="VM.pageChange($event.page)" />
+<app-paginator [actual]="VM.page" [ultima]="VM.totalPages" (page-change)="VM.pageChange($event)" />

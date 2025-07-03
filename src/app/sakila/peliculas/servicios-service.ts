@@ -1,23 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { LoggerService } from '@my/library';
 import { environment } from 'src/environments/environment';
-import { ViewModelService } from '../../core';
-import { NotificationService, NavigationService, PeliculasDAOService, IdiomasDAOService, CategoriasDAOService, ActoresDAOService } from '../../common-services';
-import { AuthService } from '../../security';
+import { ViewModelPagedService } from '../../core';
+import { PeliculasDAOService, IdiomasDAOService, ActoresDAOService, CategoriasDAOService } from '../daos-services';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PeliculasViewModelService extends ViewModelService<any, number> {
+export class PeliculasViewModelService extends ViewModelPagedService<any, number> {
   readonly roleMantenimiento = environment.roleMantenimiento
 
-  constructor(notify: NotificationService, out: LoggerService, auth: AuthService, router: Router, navigation: NavigationService,
-    dao: PeliculasDAOService, protected daoIdiomas: IdiomasDAOService, protected daoCategorias: CategoriasDAOService, protected daoActores: ActoresDAOService
-  ) {
-    super(dao, { rating: 'G' }, notify, out, auth, router, navigation)
+  constructor(dao: PeliculasDAOService, protected daoIdiomas: IdiomasDAOService, protected daoCategorias: CategoriasDAOService,
+    protected daoActores: ActoresDAOService) {
+    super(dao)
     // Soluciona el problema de las clases JavaScript por el cual los métodos pierden la referencia a this cuando se referencian por nombre (ExecPipe)
     this.dameActor = this.dameActor.bind(this)
     this.dameCategoria = this.dameCategoria.bind(this)
@@ -32,27 +28,6 @@ export class PeliculasViewModelService extends ViewModelService<any, number> {
       error: err => this.handleError(err)
     });
   }
-
-  // Paginado
-
-  page = 0;
-  totalPages = 0;
-  totalRows = 0;
-  rowsPerPage = 24;
-  load(page: number = -1) {
-    if (!page || page < 0) page = this.page;
-    (this.dao as PeliculasDAOService).page(page, this.rowsPerPage).subscribe({
-      next: rslt => {
-        this.page = rslt.page;
-        this.totalPages = rslt.pages;
-        this.totalRows = rslt.rows;
-        this.listado = rslt.list;
-        this.modo = 'list';
-      },
-      error: err => this.handleError(err)
-    })
-  }
-
   // Filtrado
 
   private filtro: any = { title: '', minlength: '', maxlength: '', rating: '' }
@@ -71,6 +46,13 @@ export class PeliculasViewModelService extends ViewModelService<any, number> {
     })
   }
 
+  protected override afterAdd(): void {
+      this.elemento = { rating: 'G' }
+      this.cargaListas()
+  }
+  protected override afterEdit(): void {
+      this.cargaListas()
+  }
   // Formularios
 
   public idiomas: any[] = [];
@@ -97,7 +79,7 @@ export class PeliculasViewModelService extends ViewModelService<any, number> {
     });
   }
 
-  override cargaListas() {
+  private cargaListas() {
     this.cargaClasificaciones();
     if (this.contenidos.length === 0)
       (this.dao as PeliculasDAOService).contenidos().subscribe({

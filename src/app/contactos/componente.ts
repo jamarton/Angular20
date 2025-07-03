@@ -4,7 +4,7 @@
 import { Component, OnInit, OnDestroy, OnChanges, SimpleChanges, forwardRef, input, Injectable } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { DatePipe, NgIf, } from '@angular/common';
+import { DatePipe, } from '@angular/common';
 import { ErrorMessagePipe, TypeValidator } from '@my/library';
 import { Subscription } from 'rxjs';
 import { Paginator } from '../common-components/paginator';

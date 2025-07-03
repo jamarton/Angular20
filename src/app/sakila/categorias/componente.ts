@@ -1,11 +1,10 @@
 import { Injectable, Component, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
-import { ErrorMessagePipe, LoggerService, NotblankValidator } from '@my/library';
+import { RouterLink } from '@angular/router';
+import { ErrorMessagePipe, NotblankValidator } from '@my/library';
 import { ViewModelService } from '../../core';
-import { CategoriasDAOService, NotificationService, NavigationService } from '../../common-services';
-import { AuthService } from '../../security';
+import { CategoriasDAOService } from '../../common-services';
 import { FormsModule } from '@angular/forms';
-import { FormButtonsComponent } from '../../common-components';
+import { FormButtons } from '../../common-components';
 
 
 @Injectable({
@@ -13,9 +12,8 @@ import { FormButtonsComponent } from '../../common-components';
 })
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export class CategoriasViewModelService extends ViewModelService<any, number> {
-  constructor(dao: CategoriasDAOService, notify: NotificationService, out: LoggerService,
-    auth: AuthService, router: Router, navigation: NavigationService) {
-    super(dao, {}, notify, out, auth, router, navigation)
+  constructor(dao: CategoriasDAOService) {
+    super(dao)
   }
   public override cancel(): void {
       this.clear()
@@ -29,9 +27,9 @@ export class CategoriasViewModelService extends ViewModelService<any, number> {
   templateUrl: './tmpl-anfitrion.html',
   styleUrls: ['./componente.css'],
   standalone: true,
-  imports: [ FormsModule, RouterLink, FormButtonsComponent, ErrorMessagePipe, NotblankValidator, ]
+  imports: [ FormsModule, RouterLink, FormButtons, ErrorMessagePipe, NotblankValidator, ]
 })
-export class CategoriasComponent implements OnInit {
+export class Categorias implements OnInit {
   constructor(protected vm: CategoriasViewModelService) { }
   public get VM(): CategoriasViewModelService { return this.vm; }
   ngOnInit(): void {
@@ -39,4 +37,4 @@ export class CategoriasComponent implements OnInit {
   }
 }
 
-export const CATEGORIAS_COMPONENTES = [ CategoriasComponent, ];
+export const CATEGORIAS_COMPONENTES = [ Categorias, ];
