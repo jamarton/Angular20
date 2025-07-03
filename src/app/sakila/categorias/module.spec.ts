@@ -5,13 +5,14 @@ import { ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/cor
 import { environment } from 'src/environments/environment';
 import { LoggerService } from '@my/library';
 import { DAOServiceMock } from '../../core';
-import { CategoriasDAOService, NavigationService, NotificationService } from '../../common-services';
+import { NavigationService, NotificationService } from '../../common-services';
 
 import { NO_ERRORS_SCHEMA, Type } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CATEGORIAS_COMPONENTES, CategoriasViewModelService } from './componente';
 import { provideLocationMocks } from '@angular/common/testing';
 import { provideRouter } from '@angular/router';
+import { CategoriasDAOService } from '../daos-services';
 
 interface Categoria {
   id: number
