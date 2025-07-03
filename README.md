@@ -61,4 +61,3 @@ For more information on using the Angular CLI, including detailed command refere
 ## Pendiente
 
 - Confirmar borrado
-- Máximo de paginas en paginator

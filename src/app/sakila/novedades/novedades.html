@@ -9,7 +9,7 @@
 </form>
 @if (novedades?.films?.length > 0) {
   <h2 class="display-4">Peliculas</h2>
-  <app-peliculas-list-body [Listado]="novedades?.films" urlBase="catalogo/" (imageError)="imageErrorHandler($event)" />
+  <app-peliculas-list-body [Listado]="novedades?.films" urlBase="/sakila/catalogo/" (imageError)="imageErrorHandler($event)" />
 }
 @if (novedades?.actors?.length > 0) {
   <h2 class="display-4">Actores</h2>
