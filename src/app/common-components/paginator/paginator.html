@@ -1,0 +1,29 @@
+<nav aria-label="Page navigation">
+  <ul class="pagination justify-content-end">
+    <li class="page-item" [class.disabled]="paginaActual() === 0" aria-label="First">
+      <input type="button" class="page-link" value="&#8920;" (click)="pageChange.emit(0)">
+    </li>
+    @if(paginaActual() > 0) {
+    <li class="page-item" aria-label="Previous">
+      <input type="button" class="page-link" value="&#8810;" (click)="pageChange.emit(paginaActual()-1)">
+    </li>
+    }
+    @for (pag of paginas(); track pag) {
+    @if(pag < 0) { <li class="page-item disabled" aria-label="Elipsis">
+      <input type="button" class="page-link" value="&hellip;">
+      </li>
+      } @else {
+      <li class="page-item" [class.active]="paginaActual() === pag">
+        <input type="button" class="page-link" value="{{pag + 1}}" (click)="pageChange.emit(pag)">
+      </li>
+      }
+      }
+      @if(paginaActual() < numeroTotalDePaginas() - 1) { <li class="page-item" aria-label="Next">
+        <input type="button" class="page-link" value="&#8811;" (click)="pageChange.emit(paginaActual()+1)">
+        </li>
+        }
+        <li class="page-item" [class.disabled]="paginaActual() === numeroTotalDePaginas() - 1" aria-label="Last">
+          <input type="button" class="page-link" value="&#8921;" (click)="pageChange.emit(numeroTotalDePaginas()-1)">
+        </li>
+  </ul>
+</nav>

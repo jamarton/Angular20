@@ -4,7 +4,7 @@ import { PeliculasViewModelService } from './servicios-service';
 
 import { ErrorMessagePipe, ExecPipe, NormalizePipe, NotblankValidator, TypeValidator } from '@my/library';
 import { CommonModule } from '@angular/common';
-import { Paginator } from '../../common-components/paginator';
+import { Paginator } from '../../common-components';
 
 import { FormsModule } from '@angular/forms';
 import { FormButtons } from '../../common-components';

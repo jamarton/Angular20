@@ -7,9 +7,8 @@ import { NormalizePipe, ErrorMessagePipe, NotblankValidator, UppercaseValidator,
 import { environment } from 'src/environments/environment';
 import { ViewModelPagedService } from '../../core';
 import { ProductosDAOService, ModelosDAOService, CategoriasDAOService } from '../daos-services';
-import { FormButtons } from '../../common-components';
+import { FormButtons, Paginator } from '../../common-components';
 import { HttpParams } from '@angular/common/http';
-import { Paginator } from "../../common-components/paginator";
 import { NotificationType, WindowService } from 'src/app/common-services';
 
 @Component({

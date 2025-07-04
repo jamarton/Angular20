@@ -65,5 +65,5 @@
 }
 <app-peliculas-list-body [Listado]="VM.Listado" (imageError)="VM.imageErrorHandler($event)" />
 @if (pagina && VM.totalRows > 0) {
-<app-paginator [actual]="VM.page" [ultima]="VM.totalPages" (page-change)="VM.pageChange($event)" />
+<app-paginator [current-page]="VM.page" [total-pages]="VM.totalPages" (page-change)="VM.pageChange($event)" />
 }

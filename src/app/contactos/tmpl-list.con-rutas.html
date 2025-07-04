@@ -41,4 +41,4 @@
   </div>
 </div>
 }
-<app-paginator [actual]="VM.page" [ultima]="VM.totalPages" (page-change)="VM.pageChange($event)" />
+<app-paginator [current-page]="VM.page" [total-pages]="VM.totalPages" (page-change)="VM.pageChange($event)" />

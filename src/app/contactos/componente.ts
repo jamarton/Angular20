@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { DatePipe, } from '@angular/common';
 import { ErrorMessagePipe, TypeValidator } from '@my/library';
 import { Subscription } from 'rxjs';
-import { Paginator } from '../common-components/paginator';
+import { Paginator } from '../common-components';
 import { HttpContext } from '@angular/common/http';
 import { CancelOperationArg, RESTDAOService, ViewModelPagedService } from '../core';
 import { AUTH_REQUIRED } from '../security';

@@ -36,4 +36,4 @@
   }
 </tbody>
 </table>
-<app-paginator [actual]="VM.page" [ultima]="VM.totalPages" (pageChange)="VM.pageChange($event)" />
+<app-paginator [current-page]="VM.page" [total-pages]="VM.totalPages" (pageChange)="VM.pageChange($event)" />

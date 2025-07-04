@@ -5,7 +5,7 @@ import { Injectable, Component, OnChanges, OnDestroy, Input, SimpleChanges, OnIn
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { ErrorMessagePipe, NormalizePipe, NotblankValidator, UppercaseValidator, TypeValidator } from '@my/library';
-import { Paginator } from '../../common-components/paginator';
+import { Paginator } from '../../common-components';
 
 import { ViewModelPagedService } from '../../core';
 import { FormButtons } from '../../common-components';
