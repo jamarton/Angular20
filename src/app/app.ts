@@ -10,7 +10,6 @@ import { AjaxWait, Footer, Header, NotificationModal } from './main-components';
   styleUrl: './app.css'
 })
 export class App {
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor(_cache: NavigationService, viewContainerRef: ViewContainerRef, window: WindowService) {
     window.RootViewContainerRef = viewContainerRef
   }

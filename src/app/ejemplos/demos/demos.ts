@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Component, ComponentRef, createComponent, EnvironmentInjector, input, inputBinding, linkedSignal, output, outputBinding, signal, ViewChild, ViewContainerRef } from '@angular/core';
 import { CapitalizePipe, LoggerService, MyLibraryModule } from '@my/library';
 import { NotificationService, WindowService } from 'src/app/common-services';
@@ -199,6 +200,7 @@ export class Demos {
     }
   }
 
+  // eslint-disable-next-line @angular-eslint/use-lifecycle-interface
   ngOnDestroy(): void {
     // Asegurarse de destruir el componente si el componente padre se destruye
     this.destroyMyComponent();

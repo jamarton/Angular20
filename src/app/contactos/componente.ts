@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-empty-function */
-/* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 import { Component, OnInit, OnDestroy, OnChanges, SimpleChanges, forwardRef, input, Injectable } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -13,7 +10,7 @@ import { CancelOperationArg, RESTDAOService, ViewModelPagedService } from '../co
 import { AUTH_REQUIRED } from '../security';
 
 export interface IContacto {
-  [index: string]: any;
+  [index: string]: unknown;
   id?: number
   tratamiento?: string
   // Tratamiento?: string
@@ -81,8 +78,8 @@ export class ContactosViewModelService extends ViewModelPagedService<Contacto, n
       cancel.isCancel = !window.confirm('¿Seguro?')
   }
 
-  override imageErrorHandler(event: Event, item: any) {
-    (event.target as HTMLImageElement).src = item.sexo === 'H' ? '/images/user-not-found-male.png' : '/images/user-not-found-female.png'
+  override imageErrorHandler(event: Event, item: unknown) {
+    (event.target as HTMLImageElement).src = (item as Contacto).sexo === 'H' ? '/images/user-not-found-male.png' : '/images/user-not-found-female.png'
   }
 }
 

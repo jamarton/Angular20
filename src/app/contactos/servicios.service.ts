@@ -25,8 +25,7 @@ export interface IContacto {
 }
 
 export class Contacto implements IContacto {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [index: string]: any;
+  [index: string]: unknown;
   constructor(
     public id: number = 0,
     private _tratamiento?: string,
