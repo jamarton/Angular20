@@ -28,13 +28,13 @@
                   <hr class="dropdown-divider">
                 </li>
                 }
-                <li><a class="dropdown-item" data-bs-dismiss="offcanvas" routerLinkActive="active"
+                <li><a class="dropdown-item" data-bs-dismiss="offcanvas" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
                     [routerLink]="child.path"><i [class]="child.icono"></i> {{child.texto}}</a></li>
                 }
               </ul>
             </li>
             } @else if(item.visible && item.path) {
-            <li class="nav-item"><a class="nav-link" data-bs-dismiss="offcanvas" routerLinkActive="active"
+            <li class="nav-item"><a class="nav-link" data-bs-dismiss="offcanvas" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
                 [routerLink]="item.path"><i [class]="item.icono"></i> {{item.texto}}</a></li>
             }
             }
