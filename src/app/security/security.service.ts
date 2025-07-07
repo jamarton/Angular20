@@ -15,7 +15,7 @@ export const LOGOUT_EVENT = 'logout'
 export class AuthService {
   private isAuth = false;
   private authToken: string = '';
-  private refresh: string = '';
+  private refreshToken: string = '';
   private name = '';
   private roles: string[] = []
   private storage: Storage;
@@ -26,26 +26,26 @@ export class AuthService {
       const cache = JSON.parse(this.storage['AuthService']);
       this.isAuth = cache.isAuth;
       this.authToken = cache.authToken;
-      this.refresh = cache.refresh;
+      this.refreshToken = cache.refreshToken;
       this.name = cache.name;
       this.roles = cache.roles;
     }
   }
 
   get AuthorizationHeader() { return this.authToken; }
-  get RefreshToken() { return this.refresh; }
+  get RefreshToken() { return this.refreshToken; }
   get isAuthenticated() { return this.isAuth; }
   get Name() { return this.name; }
   get Roles() { return Object.assign([], this.roles); }
 
-  login(authToken: string, refresh: string, name: string, roles: string[]) {
+  login(tokenType: string, authToken: string, refreshToken: string, name: string, roles: string[]) {
     this.isAuth = true;
-    this.authToken = authToken;
-    this.refresh = refresh;
+    this.authToken = `${tokenType} ${authToken}`.trim();
+    this.refreshToken = refreshToken;
     this.name = name;
     this.roles = roles;
     if (this.storage) {
-      this.storage['AuthService'] = JSON.stringify({ isAuth: this.isAuth, authToken, refresh, name, roles });
+      this.storage['AuthService'] = JSON.stringify({ isAuth: this.isAuth, authToken, refreshToken, name, roles });
     }
     this.eventBus.emit(LOGIN_EVENT)
   }
@@ -58,7 +58,7 @@ export class AuthService {
   logout() {
     this.isAuth = false;
     this.authToken = '';
-    this.refresh = '';
+    this.refreshToken = '';
     this.name = '';
     this.roles = [];
     if (this.storage) {
@@ -70,8 +70,9 @@ export class AuthService {
 
 class LoginResponse {
   success = false;
-  token: string = '';
-  refresh: string = '';
+  token_type: string = 'Bearer';
+  access_token: string = '';
+  refresh_token: string = '';
   name: string = '';
   roles: string[] = [];
   expires_in: number = 0;
@@ -91,7 +92,7 @@ export class LoginService {
         .subscribe({
           next: data => {
             if (data.success === true) {
-              this.auth.login(data.token ?? '', data.refresh ?? '', data.name ?? '', data.roles ?? []);
+              this.auth.login(data.token_type ?? '', data.access_token ?? '', data.refresh_token ?? '', data.name ?? '', data.roles ?? []);
             }
             observable.next(this.auth.isAuthenticated);
           },
@@ -105,7 +106,7 @@ export class LoginService {
         .pipe(
           switchMap(data => {
             if (data.success === true) {
-              this.auth.login(data.token ?? '', data.refresh ?? '', data.name ?? '', data.roles ?? []);
+              this.auth.login(data.token_type ?? '', data.access_token ?? '', data.refresh_token ?? '', data.name ?? '', data.roles ?? []);
             } else {
               this.auth.logout()
             }
@@ -138,7 +139,8 @@ export class AuthInterceptor implements HttpInterceptor {
     const authReq = this.addAuthorizationHeader(req)
     return next.handle(authReq).pipe(
       catchError(err => {
-        if ([401, 403].includes(err.status) && (err.error?.detail ?? err.error?.message)?.match(/token.+expired/i)
+        if ([401, 403].includes(err.status)
+          && (err.headers.get('www-authenticate') ?? err.error?.detail ?? err.error?.message)?.toLowerCase().match(/token.+expired/i)
           && !authReq.url.includes('/refresh') && this.auth.isAuthenticated) {
           return this.refreshToken(authReq, next);
         }

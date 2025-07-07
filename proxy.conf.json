@@ -10,13 +10,13 @@
     "secure": false,
     "logLevel": "debug"
   },
-  "/auth": {
+  "/auth2": {
     "target": "http://localhost:8091",
     "pathRewrite": { "^/auth": "/" },
     "secure": false,
     "logLevel": "debug"
   },
-  "/auth2": {
+  "/auth": {
     "target": "http://localhost:4321",
     "pathRewrite": { "^/auth": "/api" },
     "secure": false,
