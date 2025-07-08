@@ -66,7 +66,7 @@ export class ContactosDAOService extends RESTDAOService<Contacto, number> {
 export class ContactosViewModelService extends ViewModelPagedService<Contacto, number> {
   constructor(dao: ContactosDAOService) {
     super(dao)
-    this.rowsPerPage = 10
+    this.rowsPerPage = 15
     this.orderBy = 'nombre,apellidos'
   }
 

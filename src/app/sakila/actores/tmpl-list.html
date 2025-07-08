@@ -3,7 +3,9 @@
     <tr class="table-info">
       <th class="display-4">Lista de actores</th>
       <th class="text-end">
+        @if(VM.auth.isAuthenticated) {
         <button class="btn btn-primary" routerLink="add" *ngIf="VM.auth.isInRoles(roleMantenimiento)"><i class="fas fa-plus"></i> Añadir</button>
+        }
       </th>
     </tr>
   </thead>
@@ -14,7 +16,9 @@
           <a class="btn btn-link btn-lg px-0" routerLink="{{item.id}}/{{item.nombre | normalize | lowercase}}">{{item.nombre | titlecase}}</a>
         </td>
         <td class="align-middle text-end">
+          @if(VM.auth.isAuthenticated) {
           <app-list-buttons [can-edit]="true" [editLink]="[item.id, 'edit']" [can-delete]="true" (delete)="VM.delete(item.id)" />
+          }
         </td>
       </tr>
     }

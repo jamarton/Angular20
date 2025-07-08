@@ -56,12 +56,12 @@ export class Header implements OnDestroy {
         { texto: 'Categorias', icono: 'fa-solid fa-tags', path: '/tienda/categorias', separado: true, visible: true },
         { texto: 'Modelos', icono: 'fa-solid fa-shirt', path: '/tienda/modelos', visible: true },
       ], visible: this.auth.isInRoles(this.roleMantenimiento) },
-      { texto: 'Sakila', icono: 'fa-solid fa-tv', children: [
-        { texto: 'Novedades', icono: 'fa-solid fa-calendar-plus', path: '/sakila', visible: true },
+      { texto: 'Sakila', icono: 'fa-solid fa-tv', path: '/sakila', children: [
+        // { texto: 'Novedades', icono: 'fa-solid fa-calendar-plus', path: '/sakila', visible: true },
         { texto: 'Catalogo', icono: 'fa-solid fa-film', path: '/sakila/catalogo', visible: true },
         { texto: 'Categorias', icono: 'fa-solid fa-list', path: this.auth.isInRoles(this.roleMantenimiento) ? '/sakila/categorias' : '/sakila/catalogo/categorias', visible: true },
         { texto: 'Actores', icono: 'fa-solid fa-person-rays', path: '/sakila/actores', visible: true },
-        { texto: 'Idiomas', icono: 'fa-solid fa-language', path: '/sakila/idiomas', visible: true },
+        { texto: 'Idiomas', icono: 'fa-solid fa-language', path: '/sakila/idiomas', visible: this.auth.isAuthenticated },
       ], visible: true },
       { path: '/algo.svg', texto: 'Grafica', icono: 'fa-solid fa-image', visible: true },
       { texto: 'Config', icono: 'fa-solid fa-gears', path: '/config', visible: this.auth.isAuthenticated, children: [
