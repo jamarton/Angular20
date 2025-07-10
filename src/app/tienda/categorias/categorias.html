@@ -1,1 +1,80 @@
-<p>categorias works!</p>
+<div class="d-flex flex-row flex-wrap justify-content-around align-items-stretch gap-2 mb-2 bg-primary-subtle">
+  <div class="flex-fill p-2 display-4">Categorías</div>
+  <div class="align-self-center m-2">
+    <button class="btn btn-primary" (click)="VM.add()"><i class="fas fa-plus"></i>
+      Añadir</button>
+  </div>
+</div>
+<div class="d-flex justify-content-start align-items-start gap-2 mb-2">
+  <div class="list-group">
+    @for (item of VM.Listado; track item.id) {
+    <div class="list-group-item list-group-item-action" [class.active]="VM.id()===item.id">
+      <div class="d-flex justify-content-evenly">
+        <button class="btn btn-link text-start flex-fill me-5" [class.text-light]="VM.id()===item.id" (click)="VM.id.set(item.id)">{{item.descripcion}}</button>
+        <div class="btn-group" role="group">
+          <button class="btn btn-success" (click)="VM.edit(item.id)"><i class="fas fa-pen"></i></button>
+          <button class="btn btn-danger" (click)="VM.delete(item.id)"><i class="far fa-trash-alt"></i></button>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+  <div class="list-group flex-grow-1 flex-fill">
+    @for (item of VM.SubCategorias; track item.key) {
+    <div class="list-group-item list-group-item-action">
+      <div class="d-flex w-100 justify-content-between">
+        <button type="button" class="btn btn-link flex-fill" (click)="VM.edit(item.key)">{{item.value}}</button>
+        <div class="btn-group" role="group">
+          <button class="btn btn-success" (click)="VM.edit(item.key)"><i class="fas fa-pen"></i></button>
+          <button class="btn btn-danger" (click)="VM.delete(item.key)"><i class="far fa-trash-alt"></i></button>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</div>
+@if (VM.Modo!=='list') {
+  <div class="modal fade d-block show" tabindex="-1">
+    <form #miForm="ngForm" class="modal-dialog" >
+      <div class="modal-content">
+        <div class="modal-header bg-gradient bg-info text-white">
+          <h5 class="modal-title">Categoría</h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="VM.cancel()"></button>
+        </div>
+        <div class="modal-body">
+          @if (VM.notify.HayNotificaciones) {
+            <div class="notificaciones">
+              @for (item of VM.notify.Listado; track item.Id; let i = $index) {
+                <div class="alert alert-danger alert-dismissible fade show"
+                  role="alert">
+                  {{item.Message}}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert"
+                  aria-label="Close" (click)="VM.notify.remove(i)"></button>
+                </div>
+              }
+            </div>
+          }
+          <div class="form-floating m-0">
+            <input class="form-control" [class.is-invalid]="categoria.invalid" type="text" name="categoria" id="categoria" [(ngModel)]="VM.Elemento.category"
+              #categoria="ngModel" notblank maxlength="50">
+            <label for="categoria">Categoría:</label>
+            <output class="invalid-feedback" [hidden]="categoria.valid || miForm.pristine">{{categoria.errors | errormsg}}</output>
+          </div>
+          <div class="form-floating mt-2">
+            <select class="form-control form-select" name="parentid" id="parentid"
+              [(ngModel)]="VM.Elemento.parentid" #parentid="ngModel">
+              <option [value]=""></option>
+              @for (item of VM.Listado; track item.id) {
+                <option [value]="item.id">{{item.descripcion}}</option>
+              }
+            </select>
+            <label for="parentid">Principal:</label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <app-form-buttons (send)="VM.send()" [send-disabled]="miForm.invalid" (cancel)="VM.cancel()" />
+        </div>
+      </div>
+    </form>
+  </div>
+}

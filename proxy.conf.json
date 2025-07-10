@@ -5,6 +5,12 @@
     "secure": false,
     "logLevel": "debug"
   },
+  "/api/tienda": {
+    "target": "http://localhost:5165",
+    "pathRewrite": { "^/api/tienda": "/" },
+    "secure": false,
+    "logLevel": "debug"
+  },
   "/api": {
     "target": "http://localhost:4321",
     "secure": false,

@@ -11,13 +11,6 @@ import { FormButtons, Paginator } from '../../common-components';
 import { HttpParams } from '@angular/common/http';
 import { NotificationType, WindowService } from 'src/app/common-services';
 
-@Component({
-  selector: 'app-productos',
-  imports: [],
-  templateUrl: './productos.html',
-  styleUrl: './productos.css'
-})
-
 @Injectable({
   providedIn: 'root'
 })
@@ -52,7 +45,7 @@ export class ProductosViewModelService extends ViewModelPagedService<any, number
       next: data => this.modelos = data,
       error: err => this.handleError(err)
     })
-    this.daoCategorias.subcategorias().subscribe({
+    this.daoCategorias.queryAll().subscribe({
       next: data => this.subcategorias = data,
       error: err => this.handleError(err)
     })

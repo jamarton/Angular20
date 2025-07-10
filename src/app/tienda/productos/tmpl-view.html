@@ -1,31 +1,38 @@
-<h1 class="display-1">Producto</h1>
+<div class="d-flex gap-2">
+  <img src="/api/tienda/products/{{VM.Elemento.productId}}/photo" class="img-thumbnail s" alt="Foto de {{VM.Elemento.name }}">
+  <h1 class="display-1 d-inline">Producto</h1>
+</div>
 <dl class="row">
-  <dt>Ref.</dt>
-  <dd>{{VM.Elemento.productId }}</dd>
-  <dt>Name</dt>
-  <dd>{{VM.Elemento.name }}</dd>
-  <dt>Number</dt>
-  <dd>{{VM.Elemento.productNumber }}</dd>
-  <dt>Color</dt>
-  <dd>{{VM.Elemento.color }}</dd>
-  <dt>Standard Cost</dt>
-  <dd>{{VM.Elemento.standardCost | currency:'EUR':'symbol':'1.2-2' }}</dd>
-  <dt>List Price</dt>
-  <dd>{{VM.Elemento.listPrice | currency:'EUR':'symbol':'1.2-2' }}</dd>
-  <dt>Size</dt>
-  <dd>{{VM.Elemento.size }}</dd>
-  <dt>Weight</dt>
-  <dd>{{VM.Elemento.weight }}</dd>
-  <dt>Category</dt>
-  <dd>{{VM.Elemento.productCategory }}</dd>
-  <dt>Model</dt>
-  <dd>{{VM.Elemento.productModel }}</dd>
-  <dt>Start Date</dt>
-  <dd>{{VM.Elemento.sellStartDate | date }}</dd>
-  <dt>End Date</dt>
-  <dd>{{VM.Elemento.sellEndDate | date }}</dd>
-  <dt>Discontinued Date</dt>
-  <dd>{{VM.Elemento.discontinuedDate | date }}</dd>
+  <dt class="col-md-3 col-lg-2">Ref.</dt>
+  <dd class="col-md-9 col-lg-10">{{VM.Elemento.productId }}</dd>
+  <dt class="col-md-3 col-lg-2">Name</dt>
+  <dd class="col-md-9 col-lg-10">{{VM.Elemento.name }}</dd>
+  <dt class="col-md-3 col-lg-2">Number</dt>
+  <dd class="col-md-9 col-lg-10">{{VM.Elemento.productNumber }}</dd>
+  <dt class="col-md-3 col-lg-2">Color</dt>
+  <dd class="col-md-9 col-lg-10">{{VM.Elemento.color }}</dd>
+  <dt class="col-md-3 col-lg-2">Size</dt>
+  <dd class="col-md-9 col-lg-10">{{VM.Elemento.size }}</dd>
+  <dt class="col-md-3 col-lg-2">Weight</dt>
+  <dd class="col-md-9 col-lg-10">{{VM.Elemento.weight }}</dd>
+  <dt class="col-md-3 col-lg-2">Standard Cost</dt>
+  <dd class="col-md-9 col-lg-10">{{VM.Elemento.standardCost | currency:'EUR':'symbol':'1.2-2' }}</dd>
+  <dt class="col-md-3 col-lg-2">List Price</dt>
+  <dd class="col-md-9 col-lg-10">{{VM.Elemento.listPrice | currency:'EUR':'symbol':'1.2-2' }}</dd>
+  <dt class="col-md-3 col-lg-2">Category</dt>
+  <dd class="col-md-9 col-lg-10">{{VM.Elemento.productCategory }}</dd>
+  <dt class="col-md-3 col-lg-2">Model</dt>
+  <dd class="col-md-9 col-lg-10">{{VM.Elemento.productModel }}</dd>
+  <dt class="col-md-3 col-lg-2">Start Date</dt>
+  <dd class="col-md-9 col-lg-10">{{VM.Elemento.sellStartDate | date }}</dd>
+  @if(VM.Elemento.sellEndDate){
+  <dt class="col-md-3 col-lg-2">End Date</dt>
+  <dd class="col-md-9 col-lg-10">{{VM.Elemento.sellEndDate | date }}</dd>
+  }
+  @if(VM.Elemento.discontinuedDate){
+  <dt class="col-md-3 col-lg-2">Discontinued Date</dt>
+  <dd class="col-md-9 col-lg-10">{{VM.Elemento.discontinuedDate | date }}</dd>
+  }
 </dl>
 <div>
   <app-form-buttons (cancel)="VM.cancel()" />

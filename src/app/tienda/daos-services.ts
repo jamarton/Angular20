@@ -10,7 +10,7 @@ import { AUTH_REQUIRED } from '../security';
 })
 export class ProductosDAOService extends RESTDAOService<any, number> {
   constructor() {
-    super('Products', { context: new HttpContext().set(AUTH_REQUIRED, true) });
+    super('tienda/products', { context: new HttpContext().set(AUTH_REQUIRED, true) });
   }
   override query(extras = {}): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}?modo=short`, Object.assign({}, this.option, extras));
@@ -31,10 +31,13 @@ export class ProductosDAOService extends RESTDAOService<any, number> {
 })
 export class CategoriasDAOService extends RESTDAOService<any, number> {
   constructor() {
-    super('categorias', { context: new HttpContext().set(AUTH_REQUIRED, true) });
+    super('tienda/categorias', { context: new HttpContext().set(AUTH_REQUIRED, true) });
   }
-  subcategorias(): Observable<any[]> {
+  queryAll(): Observable<any[]> {
     return this.http.get<any>(`${this.baseUrl}/subcategorias`, this.option);
+  }
+  querySubcategorias(key: number): Observable<any[]> {
+    return this.http.get<any>(`${this.baseUrl}/${key}/subcategorias`, this.option);
   }
 }
 
@@ -43,6 +46,6 @@ export class CategoriasDAOService extends RESTDAOService<any, number> {
 })
 export class ModelosDAOService extends RESTDAOService<any, number> {
   constructor() {
-    super('modelos', { context: new HttpContext().set(AUTH_REQUIRED, true) });
+    super('tienda/modelos', { context: new HttpContext().set(AUTH_REQUIRED, true) });
   }
 }

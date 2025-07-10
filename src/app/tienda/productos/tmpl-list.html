@@ -11,7 +11,7 @@
     @for (item of VM.Listado; track item.productId) {
       <tr>
         <td>
-          <img class="img-thumbnail me-2" style="max-height: 60px;" src="/api/Products/{{item.productId}}/photo" (error)="VM.imageErrorHandler($event)"
+          <img class="img-thumbnail me-2" style="max-height: 60px;" src="/api/tienda/products/{{item.productId}}/photo" (error)="VM.imageErrorHandler($event)"
                 alt="Foto de {{item.name}}">
           <a class="btn btn-link btn-lg px-0" routerLink="{{item.productId}}/{{item.name | normalize | lowercase}}">{{item.name | titlecase}}</a>
         </td>
